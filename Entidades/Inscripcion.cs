@@ -11,6 +11,7 @@ namespace Entidades
     {
         private int Id;
         private bool Activo;
+        private int IdEstudiante;  // <-- nuevo campo
 
         public Inscripcion()
         {
@@ -30,6 +31,11 @@ namespace Entidades
             set { Activo = value; }
 
 
+        }
+        public int idEstudiante
+        {
+            get { return IdEstudiante; }
+            set { IdEstudiante = value; }
         }
     }
 }

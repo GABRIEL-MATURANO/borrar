@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data;
-using System.Data.OleDb;
+using System.Data.SqlClient;
 using Entidades;
 
 namespace Datos
@@ -15,18 +15,29 @@ namespace Datos
         {
             int resultado = -1;
             string orden = string.Empty;
-            if (accion == "Alta")
-                orden = "insert into Estudiantes values (" + objEstudiantes.id +
-                                                         ",'" + objEstudiantes.nombre + ",'" + 
-                                                                objEstudiantes.legajo  + "');";
-            if (accion == "Modificar")
-                orden = "update Estudiantes set Nombre='" + objEstudiantes.nombre +
-                      "' where Id = "+ objEstudiantes.id + "; ";
-            // NO falta la orden de borrar
-            if (accion == "Baja")
-                orden = "delete from Estudiantes where Id = " + objEstudiantes.id + ";";
 
-            OleDbCommand cmd = new OleDbCommand(orden, conexion);
+            if (accion == "Alta")
+            {
+                orden = "INSERT INTO Estudiantes VALUES (" + objEstudiantes.id +
+                        ", '" + objEstudiantes.nombre + "', " + objEstudiantes.legajo + ");";
+            }
+            else if (accion == "Modificar")
+            {
+                orden = "UPDATE Estudiantes SET Nombre = '" + objEstudiantes.nombre +
+                        "', Legajo = " + objEstudiantes.legajo +
+                        " WHERE Id = " + objEstudiantes.id + ";";
+            }
+            else if (accion == "Baja")
+            {
+                orden = "DELETE FROM Estudiantes WHERE Id = " + objEstudiantes.id + ";";
+            }
+            else
+            {
+                throw new Exception("Acción inválida: " + accion);
+            }
+
+            SqlCommand cmd = new SqlCommand(orden, conexion);
+
             try
             {
                 Abrirconexion();
@@ -34,29 +45,33 @@ namespace Datos
             }
             catch (Exception e)
             {
-                throw new Exception("Errror al tratar de guardar,borrar o modificar Estudiantes ",e);
+                throw new Exception("Error al guardar, borrar o modificar Estudiantes", e);
             }
             finally
             {
                 Cerrarconexion();
                 cmd.Dispose();
             }
+
             return resultado;
         }
+
         public DataSet listadoEstudiantes(string cual)
         {
             string orden = string.Empty;
+
             if (cual != "Todos")
-                orden = "select * from Estudiantes where Id = " + int.Parse(cual) + ";";
+                orden = "SELECT * FROM Estudiantes WHERE Id = " + int.Parse(cual) + ";";
             else
-                orden = "select * from Estudiantes;";
-            OleDbCommand cmd = new OleDbCommand(orden, conexion);
+                orden = "SELECT * FROM Estudiantes;";
+
+            SqlCommand cmd = new SqlCommand(orden, conexion);
+            SqlDataAdapter da = new SqlDataAdapter();
             DataSet ds = new DataSet();
-            OleDbDataAdapter da = new OleDbDataAdapter();
+
             try
             {
                 Abrirconexion();
-                cmd.ExecuteNonQuery();
                 da.SelectCommand = cmd;
                 da.Fill(ds);
             }
@@ -69,6 +84,7 @@ namespace Datos
                 Cerrarconexion();
                 cmd.Dispose();
             }
+
             return ds;
         }
     }

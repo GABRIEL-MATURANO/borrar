@@ -41,10 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NegCalificacion.cs" />
     <Compile Include="NegEstudiantes.cs" />
     <Compile Include="NegInscripcion.cs" />
-    <Compile Include="NegMateria.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

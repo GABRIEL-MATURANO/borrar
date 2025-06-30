@@ -5,24 +5,26 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 using System.Data.OleDb;
+using System.Data.SqlClient;
 
 namespace Datos
 {
     public class DatosConexionBD
     {
-        public OleDbConnection conexion;
-        public string cadenaConexion = "Provider=SQLOLEDB;Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=BdBorrar;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False";
+        public SqlConnection conexion;
+
+        private readonly string cadenaConexion = @"Data Source=GABRIEL\SQLEXPRESS;Initial Catalog=Borrar;Integrated Security=True;";
 
         public DatosConexionBD()
         {
-            conexion = new OleDbConnection(cadenaConexion);
+            conexion = new SqlConnection(cadenaConexion);
         }
+
         public void Abrirconexion()
         {
             try
             {
-                if (conexion.State == ConnectionState.Broken || conexion.State ==
-                ConnectionState.Closed)
+                if (conexion.State == ConnectionState.Broken || conexion.State == ConnectionState.Closed)
                     conexion.Open();
             }
             catch (Exception e)
@@ -30,6 +32,7 @@ namespace Datos
                 throw new Exception("Error al tratar de abrir la conexión", e);
             }
         }
+
         public void Cerrarconexion()
         {
             try

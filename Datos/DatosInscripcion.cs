@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.SqlClient;
 
 namespace Datos
 {
@@ -16,16 +17,16 @@ namespace Datos
             int resultado = -1;
             string orden = string.Empty;
             if (accion == "Alta")
-                orden = "insert into Inscripcion values (" + objInscripcion.id +
-                                                         ",'" + objInscripcion.activo + "');";
+                orden = "INSERT INTO Inscripcion (Id, Activo, IdEstudiante) VALUES ("
+                        + objInscripcion.id + ", '" + objInscripcion.activo + "', " + objInscripcion.idEstudiante + ");";
             if (accion == "Modificar")
                 orden = "update Inscripcion set Activo='" + objInscripcion.activo +
-                      "' where Id = " + objInscripcion.id + "; ";
+                      "' where Id = " + objInscripcion.id + objInscripcion.idEstudiante + "; ";
             // NO falta la orden de borrar
             if (accion == "Baja")
-                orden = "delete from Inscripcion where Id = " + objInscripcion.id + ";";
+                orden = "delete from Inscripcion where Id = " + objInscripcion.id + objInscripcion.idEstudiante +  ";";
 
-            OleDbCommand cmd = new OleDbCommand(orden, conexion);
+            SqlCommand cmd = new SqlCommand(orden, conexion);
             try
             {
                 Abrirconexion();
@@ -49,9 +50,9 @@ namespace Datos
                 orden = "select * from Inscripcion where Id = " + int.Parse(cual) + ";";
             else
                 orden = "select * from Inscripcion;";
-            OleDbCommand cmd = new OleDbCommand(orden, conexion);
+            SqlCommand cmd = new SqlCommand(orden, conexion);
             DataSet ds = new DataSet();
-            OleDbDataAdapter da = new OleDbDataAdapter();
+            SqlDataAdapter da = new SqlDataAdapter();
             try
             {
                 Abrirconexion();

@@ -17,14 +17,9 @@ namespace Presentacion
         public Estudiantes objEntEst = new Estudiantes();
         public NegEstudiantes objNegEst = new NegEstudiantes();
 
-        public Inscripcion objEntInsc = new Inscripcion();
-        public NegInscripcion_ objNegInsc = new NegInscripcion_();
+        
 
-        public Calificacion objEntCali = new Calificacion();
-        public NegCalificacion objNegCali = new NegCalificacion();
-
-        public Materia objEntMat = new Materia();
-        public NegMateria objNegMat = new NegMateria();
+       
 
         // constructor
         public FormEstudiantes()
@@ -132,7 +127,7 @@ namespace Presentacion
         {
             int resultado = -1;
             TxtBox_a_Obj();
-            resultado = objNegEst.abmEstudiantes("Agregar", objEntEst);
+            resultado = objNegEst.abmEstudiantes("Alta", objEntEst);
 
             if (resultado == -1)
                 lblMensaje.Text = "No se pudo grabar el estudiante.";
@@ -143,6 +138,12 @@ namespace Presentacion
                 Limpiar();
             }
 
+        }
+
+        private void btnInscripcion_Click(object sender, EventArgs e)
+        {
+            FormInscripcion formInscripcion = new FormInscripcion();
+            formInscripcion.Show(); // Abre la ventana como una ventana separada
         }
     }
 }

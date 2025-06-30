@@ -41,11 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DatosCalificacion.cs" />
     <Compile Include="DatosConexionBD.cs" />
     <Compile Include="DatosEstudiantes.cs" />
     <Compile Include="DatosInscripcion.cs" />
-    <Compile Include="DatosMateria.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

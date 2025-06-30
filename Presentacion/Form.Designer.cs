@@ -38,6 +38,7 @@
             this.btnModi = new System.Windows.Forms.Button();
             this.txtLegajo = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnInscripcion = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEstudiantes)).BeginInit();
             this.SuspendLayout();
             // 
@@ -132,11 +133,22 @@
             this.label1.TabIndex = 9;
             this.label1.Text = "Legajo";
             // 
+            // btnInscripcion
+            // 
+            this.btnInscripcion.Location = new System.Drawing.Point(1158, 456);
+            this.btnInscripcion.Name = "btnInscripcion";
+            this.btnInscripcion.Size = new System.Drawing.Size(125, 23);
+            this.btnInscripcion.TabIndex = 10;
+            this.btnInscripcion.Text = "Ver Inscripcion";
+            this.btnInscripcion.UseVisualStyleBackColor = true;
+            this.btnInscripcion.Click += new System.EventHandler(this.btnInscripcion_Click);
+            // 
             // FormEstudiantes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1330, 607);
+            this.Controls.Add(this.btnInscripcion);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtLegajo);
             this.Controls.Add(this.btnModi);
@@ -168,6 +180,7 @@
         private System.Windows.Forms.Button btnModi;
         private System.Windows.Forms.TextBox txtLegajo;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnInscripcion;
     }
 }
 
